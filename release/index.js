@@ -31,11 +31,7 @@ function env(condition, options = {}) {
     if (envJson === '{}') {
         return { name };
     }
-    const injection = `if (typeof process === 'undefined') {
-  process = { env: ${envJson} }
-} else {
-  Object.assign(process.env, ${envJson})
-}\n`;
+    const injection = `if (typeof process === 'undefined') { process = { env: ${envJson} } } else { Object.assign(process.env, ${envJson}) }\n`;
     const injectEnv = (code) => {
         const magicString = new MagicString__default["default"](code);
         magicString.prepend(injection);
