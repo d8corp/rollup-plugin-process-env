@@ -34,7 +34,7 @@ function env(condition, options = {}) {
   } else {
     process.env = env
   }
-}())\n`;
+})()\n`;
     const injectEnv = (code) => {
         const magicString = new MagicString(code);
         magicString.prepend(injection);

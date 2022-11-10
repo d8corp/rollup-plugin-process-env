@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-process-env",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Rollup plugin to use process.env",
   "homepage": "https://github.com/d8corp/rollup-plugin-process-env",
   "author": "Mikhail Lysikov <d8corp@mail.ru>",

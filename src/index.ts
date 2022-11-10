@@ -62,7 +62,7 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
   } else {
     process.env = env
   }
-}())\n`
+})()\n`
 
   const injectEnv = (code: string) => {
     const magicString = new MagicString(code)
