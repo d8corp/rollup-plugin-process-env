@@ -2,6 +2,10 @@
 
 ## v1.0
 
+### v1.0.2 [![11.11.2021](https://img.shields.io/date/1668117875)](https://github.com/d8corp/rollup-plugin-process-env/tree/v1.0.2)
+
+- improve injected env size
+
 ### v1.0.1 [![11.11.2021](https://img.shields.io/date/1668116972)](https://github.com/d8corp/rollup-plugin-process-env/tree/v1.0.1)
 
 - code style
