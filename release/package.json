@@ -1,0 +1,39 @@
+{
+  "name": "rollup-plugin-process-env",
+  "version": "1.0.0",
+  "description": "Rollup plugin to use process.env",
+  "homepage": "https://github.com/d8corp/rollup-plugin-process-env",
+  "author": "Mikhail Lysikov <d8corp@mail.ru>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.mjs",
+  "esnext": "index.mjs",
+  "jsnext:main": "index.mjs",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "innetjs release -n",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "release": "innetjs release -n -p",
+    "patch": "innetjs patch",
+    "minor": "innetjs minor",
+    "major": "innetjs major"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d8corp/rollup-plugin-process-env.git"
+  },
+  "keywords": [
+    "rollup-plugin",
+    "env",
+    "front-end"
+  ],
+  "bugs": {
+    "url": "https://github.com/d8corp/rollup-plugin-process-env/issues"
+  },
+  "dependencies": {
+    "@cantinc/utils": "^1.2.7",
+    "@rollup/pluginutils": "^5.0.2",
+    "magic-string": "^0.26.7"
+  }
+}
