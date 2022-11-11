@@ -56,13 +56,13 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
   const injection = `;(function () {
   const env = ${envJson}
   if (typeof process === 'undefined') {
-    process = { env }
+    globalThis.process = { env: env }
   } else if (process.env) {
     Object.assign(process.env, env)
   } else {
     process.env = env
   }
-})()\n`
+})();\n`
 
   const injectEnv = (code: string) => {
     const magicString = new MagicString(code)

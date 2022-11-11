@@ -34,13 +34,13 @@ function env(condition, options = {}) {
     const injection = `;(function () {
   const env = ${envJson}
   if (typeof process === 'undefined') {
-    process = { env }
+    globalThis.process = { env: env }
   } else if (process.env) {
     Object.assign(process.env, env)
   } else {
     process.env = env
   }
-})()\n`;
+})();\n`;
     const injectEnv = (code) => {
         const magicString = new MagicString__default["default"](code);
         magicString.prepend(injection);
