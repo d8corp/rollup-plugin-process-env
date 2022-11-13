@@ -31,7 +31,7 @@ function env(condition, options = {}) {
     if (envJson === '{}') {
         return { name };
     }
-    const injection = `;(function () {
+    const injectionCode = `;(function () {
   const env = ${envJson}
   if (typeof process === 'undefined') {
     globalThis.process = { env: env }
@@ -41,7 +41,7 @@ function env(condition, options = {}) {
     process.env = env
   }
 })();\n`;
-    const injectEnv = (code) => {
+    const injectEnv = (code, injection) => {
         const magicString = new MagicString__default["default"](code);
         magicString.prepend(injection);
         return {
@@ -50,12 +50,13 @@ function env(condition, options = {}) {
         };
     };
     if (virtual) {
+        const injection = `import from '${VIRTUAL_ID}'\n`;
         return {
             name,
             transform(code, id) {
                 if (!filter(id) || id === VIRTUAL_ID)
                     return null;
-                return injectEnv(code);
+                return injectEnv(code, injection);
             },
             resolveId(id) {
                 if (id === VIRTUAL_ID)
@@ -63,7 +64,7 @@ function env(condition, options = {}) {
             },
             load(id) {
                 if (id === VIRTUAL_ID)
-                    return injection;
+                    return injectionCode;
             },
         };
     }
@@ -72,7 +73,7 @@ function env(condition, options = {}) {
         transform(code, id) {
             if (!filter(id))
                 return null;
-            return injectEnv(code);
+            return injectEnv(code, injectionCode);
         },
     };
 }

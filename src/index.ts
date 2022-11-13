@@ -53,7 +53,7 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
     return { name }
   }
 
-  const injection = `;(function () {
+  const injectionCode = `;(function () {
   const env = ${envJson}
   if (typeof process === 'undefined') {
     globalThis.process = { env: env }
@@ -64,7 +64,7 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
   }
 })();\n`
 
-  const injectEnv = (code: string) => {
+  const injectEnv = (code: string, injection: string) => {
     const magicString = new MagicString(code)
     magicString.prepend(injection)
     return {
@@ -74,17 +74,19 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
   }
 
   if (virtual) {
+    const injection = `import from '${VIRTUAL_ID}'\n`
+
     return {
       name,
       transform (code, id) {
         if (!filter(id) || id === VIRTUAL_ID) return null
-        return injectEnv(code)
+        return injectEnv(code, injection)
       },
       resolveId (id: string) {
         if (id === VIRTUAL_ID) return VIRTUAL_ID
       },
       load (id: string) {
-        if (id === VIRTUAL_ID) return injection
+        if (id === VIRTUAL_ID) return injectionCode
       },
     }
   }
@@ -94,7 +96,7 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
     transform (code, id) {
       if (!filter(id)) return null
 
-      return injectEnv(code)
+      return injectEnv(code, injectionCode)
     },
   }
 }

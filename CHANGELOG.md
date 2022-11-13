@@ -2,6 +2,10 @@
 
 ## v1.0
 
+### v1.0.5 [![13.11.2021](https://img.shields.io/date/1668339680)](https://github.com/d8corp/rollup-plugin-process-env/tree/v1.0.5)
+
+- fix virtual error
+
 ### v1.0.4 [![11.11.2021](https://img.shields.io/date/1668169785)](https://github.com/d8corp/rollup-plugin-process-env/tree/v1.0.4)
 
 - fix browser compilation error
