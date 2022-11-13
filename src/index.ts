@@ -74,7 +74,7 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
   }
 
   if (virtual) {
-    const injection = `import from '${VIRTUAL_ID}'\n`
+    const injection = `import '${VIRTUAL_ID}'\n`
 
     return {
       name,
