@@ -9,8 +9,10 @@ export interface EnvOptions {
     exclude?: string | string[];
     /** Injection with virtual, by default auto definition relates to `include` */
     virtual?: boolean;
+    /** Default env values */
+    preset?: EnvValues;
 }
 declare function env(prefix: string, options?: EnvOptions): Plugin;
-declare function env(values: EnvValues, options?: EnvOptions): Plugin;
+declare function env(values: EnvValues, options?: Omit<EnvOptions, 'preset'>): Plugin;
 declare function env(condition: ConditionFn, options?: EnvOptions): Plugin;
 export default env;

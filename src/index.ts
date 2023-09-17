@@ -13,19 +13,22 @@ export interface EnvOptions {
   exclude?: string | string[]
   /** Injection with virtual, by default auto definition relates to `include` */
   virtual?: boolean
+  /** Default env values */
+  preset?: EnvValues
 }
 
 const name = 'rollup-plugin-process-env'
 const VIRTUAL_ID = `\0${name}`
 
 function env (prefix: string, options?: EnvOptions): Plugin
-function env (values: EnvValues, options?: EnvOptions): Plugin
+function env (values: EnvValues, options?: Omit<EnvOptions, 'preset'>): Plugin
 function env (condition: ConditionFn, options?: EnvOptions): Plugin
 function env (condition: Condition, options: EnvOptions = {}): Plugin {
   const {
     include,
     exclude,
     virtual = !include || (Array.isArray(include) && include.length > 1),
+    preset = {},
   } = options
   const filter = createFilter(include, exclude)
 
@@ -37,7 +40,7 @@ function env (condition: Condition, options: EnvOptions = {}): Plugin {
 
   if (typeof condition === 'function') {
     const conditionFn = condition
-    condition = {}
+    condition = preset
 
     for (const key in process.env) {
       const value = process.env[key]

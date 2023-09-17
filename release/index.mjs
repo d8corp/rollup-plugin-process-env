@@ -5,7 +5,7 @@ import MagicString from 'magic-string';
 const name = 'rollup-plugin-process-env';
 const VIRTUAL_ID = `\0${name}`;
 function env(condition, options = {}) {
-    const { include, exclude, virtual = !include || (Array.isArray(include) && include.length > 1), } = options;
+    const { include, exclude, virtual = !include || (Array.isArray(include) && include.length > 1), preset = {} } = options;
     const filter = createFilter(include, exclude);
     if (typeof condition === 'string') {
         const conditionStr = condition;
@@ -13,7 +13,7 @@ function env(condition, options = {}) {
     }
     if (typeof condition === 'function') {
         const conditionFn = condition;
-        condition = {};
+        condition = preset;
         for (const key in process.env) {
             const value = process.env[key];
             if (conditionFn(key)) {
